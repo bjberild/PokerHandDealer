@@ -6,26 +6,35 @@ import java.util.Random;
 
 public class DeckOfCards {
 
-  private ArrayList<Card> deck;
+  private ArrayList<Card> deck = new ArrayList<>();
   private static final Random random = new Random();
 
   public DeckOfCards() {
+    restockDeck();
+  }
+
+  public Card drawCard() {
+    int index = random.nextInt(deck.size());
+    return deck.remove(index);
+  }
+
+  public void clearDeck() {
+    deck.clear();
+  }
+
+  public void restockDeck() {
+    if (!deck.isEmpty()) {
+      clearDeck();
+    }
+
     String[] suits = {"♠", "♥", "♦", "♣"};
     String[] faces = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-
-
-    deck = new ArrayList<>();
 
     for (int i = 0; i < suits.length; i++) {
       for (int j = 0; j < faces.length; j++) {
         deck.add(new Card(i, j, suits[i] + faces[j]));
       }
     }
-  }
-
-  public Card drawCard() {
-    int index = random.nextInt(deck.size());
-    return deck.remove(index);
   }
 
   public List<Card> drawFullHand() {
