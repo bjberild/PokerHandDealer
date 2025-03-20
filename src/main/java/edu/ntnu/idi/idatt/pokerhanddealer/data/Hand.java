@@ -6,26 +6,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Hand {
-  ArrayList<Card> hand;
+  ArrayList<Card> pokerHand = new ArrayList<>();
 
-  public Hand() {
-    hand = new ArrayList<>();
-  }
 
   public void addCard(Card card) {
-    hand.add(card);
+    pokerHand.add(card);
   }
 
-  public ArrayList<Card> getHand() {
-    return hand;
+  public ArrayList<Card> getPokerHand() {
+    return pokerHand;
   }
 
-  public void setHand(ArrayList<Card> hand) {
-    this.hand = hand;
+  public void setPokerHand(ArrayList<Card> pokerHand) {
+    this.pokerHand = pokerHand;
   }
 
   public void clearHand() {
-    hand.clear();
+    pokerHand.clear();
   }
 
   public String checkHand() {
@@ -42,7 +39,7 @@ public class Hand {
   }
 
   private boolean isRoyalFlush() {
-    return isStraightFlush() && hand.stream().anyMatch(card -> card.getRank() == 12);
+    return isStraightFlush() && pokerHand.stream().anyMatch(card -> card.getRank() == 12);
   }
 
   private boolean isStraightFlush() {
@@ -58,12 +55,12 @@ public class Hand {
   }
 
   private boolean isFlush() {
-    return hand.stream().allMatch(card -> card.getSuit() == hand.getFirst().getSuit());
+    return pokerHand.stream().allMatch(card -> card.getSuit() == pokerHand.getFirst().getSuit());
   }
 
   private boolean isStraight() {
     ArrayList<Integer> ranks = new ArrayList<>();
-    for (Card card : hand) {
+    for (Card card : pokerHand) {
       ranks.add(card.getRank());
     }
     Collections.sort(ranks);
@@ -81,7 +78,7 @@ public class Hand {
 
   private boolean isTwoPair() {
     Map<Integer, Integer> rankCount = new HashMap<>();
-    for (Card card : hand) {
+    for (Card card : pokerHand) {
       rankCount.put(card.getRank(), rankCount.getOrDefault(card.getRank(), 0) + 1);
     }
     int pairCount = 0;
@@ -99,9 +96,30 @@ public class Hand {
 
   private boolean hasNOfAKind(int n) {
     Map<Integer, Integer> rankCount = new HashMap<>();
-    for (Card card : hand) {
+    for (Card card : pokerHand) {
       rankCount.put(card.getRank(), rankCount.getOrDefault(card.getRank(), 0) + 1);
     }
     return rankCount.values().stream().anyMatch(count -> count == n);
+  }
+
+  public int sumOfRanks() {
+    return pokerHand.stream().mapToInt(Card::getRank).sum();
+  }
+
+  public String getHearts() {
+    return pokerHand.stream().filter(card -> card.getSuit() == 1).map(Card::getCardString).reduce("", (a, b) -> a + b);
+  }
+
+  public boolean containsCard(Card card) {
+    return pokerHand.contains(card);
+  }
+
+  public boolean containsQueenOfSpades() {
+    Card card = new Card(0, 11, "♠Q");
+    return containsCard(card);
+  }
+
+  public boolean isFlushFive() {
+    return isFlush() && pokerHand.size() == 5;
   }
 }
