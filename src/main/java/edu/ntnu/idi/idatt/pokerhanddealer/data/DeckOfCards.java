@@ -37,7 +37,7 @@ public class DeckOfCards {
     }
   }
 
-  public List<Card> drawFullHand() {
+  public ArrayList<Card> drawFullHand() {
     if (deck.isEmpty()) {
       return null;
     } else if (deck.size() < 5) {
