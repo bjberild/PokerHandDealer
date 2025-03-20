@@ -26,6 +26,7 @@ public class Hand {
   }
 
   public String checkHand() {
+    if (pokerHand.isEmpty()) return "Hand is empty";
     if (isRoyalFlush()) return "Royal Flush";
     if (isStraightFlush()) return "Straight Flush";
     if (isFourOfAKind()) return "Four of a Kind";

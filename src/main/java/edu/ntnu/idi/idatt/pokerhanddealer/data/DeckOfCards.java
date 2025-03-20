@@ -39,10 +39,10 @@ public class DeckOfCards {
 
   public ArrayList<Card> drawFullHand() {
     if (deck.isEmpty()) {
-      return null;
+      return new ArrayList<>();
     } else if (deck.size() < 5) {
       ArrayList<Card> hand = new ArrayList<>();
-      for (int i = 0; i < getDeckSize(); i++) {
+      for (int i = 0; i < getDeckSize()+1; i++) {
         hand.add(drawCard());
       }
       return hand;

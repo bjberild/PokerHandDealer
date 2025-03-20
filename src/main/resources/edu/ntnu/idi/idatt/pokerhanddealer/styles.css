@@ -1,0 +1,31 @@
+.card {
+  -fx-border-color: black;
+  -fx-border-width: 2;
+  -fx-border-radius: 5;
+  -fx-background-color: white;
+  -fx-padding: 10;
+  -fx-font-size: 20;
+  -fx-font-family: "Arial";
+  -fx-text-alignment: center;
+  -fx-min-width: 50;
+  -fx-pref-width: 60;
+  -fx-min-height: 70;
+  -fx-pref-height: 80;
+  -fx-alignment: center;
+}
+
+.card.hearts {
+  -fx-text-fill: red;
+}
+
+.card.diamonds {
+  -fx-text-fill: orange;
+}
+
+.card.spades {
+  -fx-text-fill: black;
+}
+
+.card.clubs {
+  -fx-text-fill: #4287f5;
+}
